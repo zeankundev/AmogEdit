@@ -1,0 +1,15 @@
+set(kdenlive_SRCS
+  ${kdenlive_SRCS}
+  jobs/abstracttask.cpp
+  jobs/taskmanager.cpp
+  jobs/audiolevelstask.cpp
+  jobs/cliploadtask.cpp
+  jobs/proxytask.cpp
+  jobs/stabilizetask.cpp
+  jobs/speedtask.cpp
+  jobs/transcodetask.cpp
+  jobs/filtertask.cpp
+  jobs/cachetask.cpp
+  jobs/scenesplittask.cpp
+  jobs/cuttask.cpp
+  PARENT_SCOPE)

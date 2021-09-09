@@ -1,0 +1,691 @@
+{
+  "app-id": "org.kde.kdenlive",
+  "default-branch": "master",
+  "runtime": "org.kde.Platform",
+  "runtime-version": "5.15",
+  "sdk": "org.kde.Sdk",
+  "command": "amogedit",
+  "rename-icon": "amogedit",
+  "desktop-file-name-suffix": " (Nightly)",
+  "finish-args": [
+    "--require-version=0.11.4",
+    "--share=ipc",
+    "--socket=x11",
+    "--device=all",
+    "--socket=pulseaudio",
+    "--share=network",
+    "--filesystem=host",
+    "--filesystem=xdg-config/kdeglobals:ro",
+    "--env=TMPDIR=/var/tmp",
+    "--env=QT_ENABLE_HIGHDPI_SCALING=1",
+    "--env=FREI0R_PATH=/app/lib/frei0r-1",
+    "--env=LADSPA_PATH=/app/extensions/Plugins/ladspa:/app/lib/ladspa"
+  ],
+  "add-extensions": {
+    "org.freedesktop.LinuxAudio.Plugins": {
+      "directory": "extensions/Plugins",
+      "version": "20.08",
+      "add-ld-path": "lib",
+      "merge-dirs": "ladspa",
+      "subdirectories": true,
+      "no-autodownload": true
+    },
+    "org.freedesktop.LinuxAudio.Plugins.swh": {
+      "directory": "extensions/Plugins/swh",
+      "version": "20.08",
+      "add-ld-path": "lib",
+      "merge-dirs": "ladspa",
+      "autodelete": false,
+      "subdirectories": true
+    },
+    "org.freedesktop.LinuxAudio.Plugins.TAP": {
+      "directory": "extensions/Plugins/TAP",
+      "version": "20.08",
+      "add-ld-path": "lib",
+      "merge-dirs": "ladspa",
+      "autodelete": false,
+      "subdirectories": true
+    }
+  },
+  "cleanup": [
+    "/include",
+    "/lib/pkgconfig",
+    "/lib/cmake",
+    "/mkspecs",
+    "/share/aclocal",
+    "/share/gtk-doc",
+    "/share/man",
+    "/share/pkgconfig",
+    "*.a",
+    "*.la",
+    "*.cmake"
+  ],
+  "modules": [
+    "python-modules.json",
+    {
+      "name": "rttr",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_INSTALL_LIBDIR=lib",
+        "-DBUILD_EXAMPLES=OFF",
+        "-DBUILD_DOCUMENTATION=OFF",
+        "-DBUILD_UNIT_TESTS=OFF",
+        "-DBUILD_PACKAGE=OFF",
+        "-DBUILD_STATIC=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://github.com/rttrorg/rttr/releases/download/v0.9.6/rttr-0.9.6-src.tar.gz",
+          "sha256": "f62caee43016489320f8a69145c9208cddd72e451ea95618bc26a49a4cd6c990"
+        }
+      ]
+    },
+    {
+      "name": "eigen",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "cleanup": [
+        "*"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://gitlab.com/libeigen/eigen/-/archive/3.3.9/eigen-3.3.9.tar.bz2",
+          "sha256": "0fa5cafe78f66d2b501b43016858070d52ba47bd9b1016b0165a7b8e04675677"
+        }
+      ]
+    },
+    {
+      "name": "fftw-float",
+      "config-opts": [
+        "--disable-doc",
+        "--enable-shared",
+        "--disable-static",
+        "--enable-threads",
+        "--enable-float",
+        "--enable-openmp"
+      ],
+      "build-options": {
+        "arch": {
+          "x86_64": {
+            "config-opts": [
+              "--enable-avx",
+              "--enable-sse"
+            ]
+          },
+          "aarch64": {
+            "config-opts": [
+              "--enable-neon"
+            ]
+          }
+        }
+      },
+      "cleanup": [
+        "/bin"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "http://www.fftw.org/fftw-3.3.9.tar.gz",
+          "sha256": "bf2c7ce40b04ae811af714deb512510cc2c17b9ab9d6ddcf49fe4487eea7af3d"
+        }
+      ]
+    },
+    {
+      "name": "sox",
+      "config-opts": [
+        "--disable-static"
+      ],
+      "cleanup": [
+        "/bin"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://downloads.sourceforge.net/project/sox/sox/14.4.2/sox-14.4.2.tar.bz2",
+          "sha256": "81a6956d4330e75b5827316e44ae381e6f1e8928003c6aa45896da9041ea149c",
+          "mirror-urls": [
+            "http://http.debian.net/debian/pool/main/s/sox/sox_14.4.2.orig.tar.bz2"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "zimg",
+      "buildsystem": "autotools",
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://github.com/sekrit-twc/zimg/archive/release-3.0.2.tar.gz",
+          "sha256": "b9eadf1df12ae8395ba781f2468965d411b21abbebbebeae3651d492227d4633"
+        }
+      ]
+    },
+    {
+      "name": "exiv2",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=RelWithDebInfo"
+      ],
+      "cleanup": [
+        "/bin"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://www.exiv2.org/builds/exiv2-0.27.4-Source.tar.gz",
+          "sha256": "84366dba7c162af9a7603bcd6c16f40fe0e9af294ba2fd2f66ffffb9fbec904e"
+        }
+      ]
+    },
+    {
+      "name": "vidstab",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://github.com/georgmartius/vid.stab/archive/v1.1.0.tar.gz",
+          "sha256": "14d2a053e56edad4f397be0cb3ef8eb1ec3150404ce99a426c4eb641861dc0bb"
+        }
+      ]
+    },
+    {
+      "name": "jack2",
+      "buildsystem": "simple",
+      "build-commands": [
+        "./waf configure --prefix=/app --htmldir=/app/share/doc/jack/ --classic",
+        "./waf build -j $FLATPAK_BUILDER_N_JOBS",
+        "./waf install"
+      ],
+      "cleanup": [
+        "/bin",
+        "/share",
+        "/lib/jack",
+        "/lib/libjackserver.so*"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://github.com/jackaudio/jack2/archive/v1.9.18.tar.gz",
+          "sha256": "5a1d64118034d58529d68a9af42710f9d4843536257c496118065ea3d3e4ae2c"
+        }
+      ]
+    },
+    {
+      "name": "rtaudio",
+      "config-opts": [
+        "--disable-static",
+        "--enable-shared"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "http://www.music.mcgill.ca/~gary/rtaudio/release/rtaudio-5.1.0.tar.gz",
+          "sha256": "ff138b2b6ed2b700b04b406be718df213052d4c952190280cf4e2fab4b61fe09"
+        }
+      ]
+    },
+    {
+      "name": "gavl",
+      "rm-configure": true,
+      "config-opts": [
+        "--without-doxygen",
+        "--disable-static",
+        "--enable-shared"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://downloads.sourceforge.net/project/gmerlin/gavl/1.4.0/gavl-1.4.0.tar.gz",
+          "sha256": "51aaac41391a915bd9bad07710957424b046410a276e7deaff24a870929d33ce",
+          "mirror-urls": [
+            "http://http.debian.net/debian/pool/main/g/gavl/gavl_1.4.0.orig.tar.gz"
+          ]
+        },
+        {
+          "type": "shell",
+          "commands": [
+            "cp -p /usr/share/automake-*/config.{sub,guess} ."
+          ]
+        },
+        {
+          "type": "script",
+          "dest-filename": "autogen.sh",
+          "commands": [
+            "autoreconf -vfi"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "frei0r-plugins",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=RelWithDebInfo"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://files.dyne.org/frei0r/releases/frei0r-plugins-1.7.0.tar.gz",
+          "sha256": "1b1ff8f0f9bc23eed724e94e9a7c1d8f0244bfe33424bb4fe68e6460c088523a"
+        }
+      ]
+    },
+    {
+      "name": "bigsh0t",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "no-make-install": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DBUILD_TESTING=OFF"
+      ],
+      "post-install": [
+        "cp -v bigsh0t-*-linux/lib/frei0r-1/*.so /app/lib/frei0r-1"
+      ],
+      "sources": [
+        {
+          "type": "git",
+          "url": "https://bitbucket.org/leo_sutic/bigsh0t",
+          "tag": "2.3"
+        }
+      ]
+    },
+    {
+      "name": "ladspa-sdk",
+      "no-autogen": true,
+      "subdir": "src",
+      "make-install-args": [
+        "INSTALL_PLUGINS_DIR=/app/lib/ladspa",
+        "INSTALL_INCLUDE_DIR=/app/include",
+        "INSTALL_BINARY_DIR=/app/bin"
+      ],
+      "cleanup": [
+        "/bin"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://www.ladspa.org/download/ladspa_sdk_1.15.tgz",
+          "sha256": "4229959b09d20c88c8c86f4aa76427843011705df22d9c28b38359fd1829fded"
+        }
+      ]
+    },
+    {
+      "name": "v4l-utils",
+      "config-opts": [
+        "--disable-static",
+        "--disable-doxygen-doc",
+        "--disable-libdvbv5",
+        "--disable-v4l-utils",
+        "--disable-qv4l2",
+        "--with-udevdir=/app/lib/udev"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://linuxtv.org/downloads/v4l-utils/v4l-utils-1.20.0.tar.bz2",
+          "sha256": "956118713f7ccb405c55c7088a6a2490c32d54300dd9a30d8d5008c28d3726f7"
+        }
+      ]
+    },
+    {
+      "name": "libass",
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://github.com/libass/libass/releases/download/0.15.1/libass-0.15.1.tar.xz",
+          "sha256": "1cdd39c9d007b06e737e7738004d7f38cf9b1e92843f37307b24e7ff63ab8e53"
+        }
+      ]
+    },
+    {
+      "name": "x264",
+      "config-opts": [
+        "--disable-cli",
+        "--enable-shared"
+      ],
+      "sources": [
+        {
+          "type": "git",
+          "url": "https://code.videolan.org/videolan/x264.git",
+          "commit": "5db6aa6cab1b146e07b60cc1736a01f21da01154"
+        }
+      ]
+    },
+    {
+      "name": "x265",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "subdir": "source",
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DENABLE_CLI=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://deb.debian.org/debian/pool/main/x/x265/x265_3.4.orig.tar.gz",
+          "sha256": "c2047f23a6b729e5c70280d23223cb61b57bfe4ad4e8f1471eeee2a61d148672"
+        }
+      ]
+    },
+    {
+      "name": "aom",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DCMAKE_INSTALL_PREFIX=/app",
+        "-DBUILD_SHARED_LIBS=1",
+        "-DENABLE_DOCS=0",
+        "-DENABLE_EXAMPLES=0",
+        "-DENABLE_TESTDATA=0",
+        "-DENABLE_TESTS=0",
+        "-DENABLE_TOOLS=0"
+      ],
+      "sources": [
+        {
+          "type": "git",
+          "url": "https://aomedia.googlesource.com/aom.git",
+          "commit": "7fadc0e77130efb05f52979b0deaba9b6a1bba6d",
+          "tag": "v3.1.1"
+        }
+      ]
+    },
+    {
+      "name": "libva",
+      "skip-arches": [
+        "aarch64"
+      ],
+      "buildsystem": "meson",
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://github.com/intel/libva/archive/refs/tags/2.12.0.tar.gz",
+          "sha256": "7bca8c8a854653e15e602f243e2452e84e4b454b26549bf80a932ab29d7d6b21"
+        }
+      ]
+    },
+    {
+      "name": "libva-utils",
+      "skip-arches": [
+        "aarch64"
+      ],
+      "buildsystem": "meson",
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://github.com/intel/libva-utils/archive/refs/tags/2.12.0.tar.gz",
+          "sha256": "bcab647f42147aa5cf83b324b6c3fe69e392e44d34aababfafcb6c3b4310377d"
+        }
+      ] 
+    },
+    {
+      "name": "mediasdk",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DBUILD_SAMPLES=OFF",
+        "-DBUILD_TESTS=OFF",
+        "-DBUILD_TOOLS=OFF",
+        "-DBUILD_TESTS=OFF",
+        "-DMFX_ENABLE_SW_FALLBACK=OFF"
+      ],
+      "sources": [
+         {
+           "type": "archive",
+           "url": "https://github.com/Intel-Media-SDK/MediaSDK/archive/refs/tags/intel-mediasdk-21.2.3.tar.gz",
+           "sha256": "7791be83e5e9f6d55f31d6ad9037012fc78b846724644b9db2087d1b7dfec078"
+         }
+      ]
+    },
+    {
+      "name": "mfx-dispatch",
+      "skip-arches": [
+        "aarch64"
+      ],
+      "buildsystem": "simple",
+      "build-commands": [
+        "autoreconf -fiv",
+        "./configure --prefix=/app",
+        "make",
+        "make install"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://github.com/lu-zero/mfx_dispatch/archive/refs/tags/1.35.tar.gz",
+          "sha256": "0790ff82158837124150ab4034db37433a92caac0f145f249d2f194d8ccba3ca"
+        }
+      ]
+    },
+    {
+      "name": "opencl-headers",
+      "buildsystem": "simple",
+      "build-commands": [
+        "cp -av CL /app/include"
+        ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://github.com/KhronosGroup/OpenCL-Headers/archive/refs/tags/v2021.06.30.tar.gz",
+          "sha256": "6640d590c30d90f89351f5e3043ae6363feeb19ac5e64bc35f8cfa1a6cd5498e"
+        }
+      ]
+    },
+    {
+      "name": "amf-headers",
+      "buildsystem": "simple",
+      "build-commands": [
+        "cp -av amf/public/include/. /app/include/AMF"
+        ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://github.com/GPUOpen-LibrariesAndSDKs/AMF/archive/refs/tags/v.1.4.21.tar.gz",
+          "sha256": "66b3a94bd284d313f9c682b331fae503f617d20126c9ce24f51b2117f5b3cf05"
+        }
+      ]
+    },
+    {
+      "name": "nv-codec-headers",
+      "cleanup": [
+        "*"
+      ],
+      "no-autogen": true,
+      "make-install-args": [
+        "PREFIX=/app"
+      ],
+      "sources": [
+        {
+          "type": "git",
+          "url": "https://git.videolan.org/git/ffmpeg/nv-codec-headers.git",
+          "commit": "315ad740ac77282c7cea67ba31f2e4b373132919",
+          "tag": "n11.0.10.1"
+        }
+      ]
+    },
+    {
+      "name": "ffmpeg",
+      "config-opts": [
+        "--enable-rpath",
+        "--enable-gpl",
+        "--disable-static",
+        "--enable-shared",
+        "--disable-doc",
+        "--disable-alsa",
+        "--enable-libfontconfig",
+        "--enable-libfreetype",
+        "--enable-libopus",
+        "--enable-libpulse",
+        "--enable-librsvg",
+        "--enable-libvpx",
+        "--enable-libdav1d",
+        "--enable-libxml2",
+        "--enable-libx264",
+        "--enable-libx265",
+        "--enable-libopenjpeg",
+        "--enable-libdav1d",
+        "--enable-libv4l2",
+        "--enable-libmp3lame",
+        "--enable-libass",
+        "--enable-gnutls",
+        "--enable-libzimg",
+        "--enable-libaom",
+        "--enable-libvidstab",
+        "--enable-vaapi",
+        "--enable-libmfx",
+        "--enable-amf",
+        "--enable-opencl",
+        "--enable-ffnvcodec",
+        "--enable-cuda-llvm",
+        "--enable-nvenc",
+        "--enable-vdpau",
+        "--enable-nvdec",
+        "--enable-cuvid"
+      ],
+      "cleanup": [
+        "/share/ffmpeg/examples"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://www.ffmpeg.org/releases/ffmpeg-4.4.tar.xz",
+          "sha256": "06b10a183ce5371f915c6bb15b7b1fffbe046e8275099c96affc29e17645d909"
+        }
+      ]
+    },
+    {
+      "name": "opencv",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DOPENCV_GENERATE_PKGCONFIG=ON",
+        "-DBUILD_LIST=tracking"
+      ],
+      "cleanup": [
+        "/bin"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://github.com/opencv/opencv/archive/4.5.3.tar.gz",
+          "sha256": "77f616ae4bea416674d8c373984b20c8bd55e7db887fd38c6df73463a0647bab"
+        },
+        {
+          "type": "archive",
+          "url": "https://github.com/opencv/opencv_contrib/archive/4.5.3.tar.gz",
+          "sha256": "73da052fd10e73aaba2560eaff10cc5177e2dcc58b27f8aedf7c649e24c233bc"
+        }
+      ]
+    },
+    {
+      "name": "libzen",
+      "subdir": "Project/GNU/Library",
+      "config-opts": [ "--enable-shared", "--disable-static" ],
+      "cleanup": [ "/bin", "/include", "/lib/pkgconfig", "/lib/*.la" ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://mediaarea.net/download/source/libzen/0.4.39/libzen_0.4.39.tar.xz",
+          "sha256": "cded5d7774294e7d5b42768ceb285243709b6e99eec6e980a3cf7f0890dbb622"
+        }
+      ]
+    },
+    {
+      "name": "libmediainfo",
+      "subdir": "Project/GNU/Library",
+      "config-opts": [ "--enable-shared", "--disable-static", "--with-libcurl" ],
+      "cleanup": [ "/bin", "/include", "/lib/pkgconfig", "/lib/*.la" ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://mediaarea.net/download/source/libmediainfo/21.03/libmediainfo_21.03.tar.xz",
+          "sha256": "56b7e9abf80cba48032165cd7a46fd8d43dd63e3af35765f66c3f134caaca4ca"
+        }
+      ]
+    },
+    {
+      "name": "mediainfo-cli",
+      "subdir": "Project/GNU/CLI",
+      "cleanup": [ "share/pixmaps", "/share/apps", "/share/kde4", "/share/kservices5" ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://mediaarea.net/download/source/mediainfo/21.03/mediainfo_21.03.tar.xz",
+          "sha256": "de50ca0b2c607b8999d3c9e542d27c97030a59f31859b612335315be6850021e"
+        }
+      ]
+    },
+    {
+      "name": "rubberband",
+      "buildsystem": "meson",
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://breakfastquay.com/files/releases/rubberband-1.9.2.tar.bz2",
+          "sha256": "b3cff5968517141fcf9e1ef6b5a1fdb06a5511f148000609216cf182ff4ab612"
+        }
+      ]
+    },
+    {
+      "name": "movit",
+      "make-args": [
+        "libmovit.la"
+      ],
+      "sources": [
+        {
+          "type": "git",
+          "url": "http://git.sesse.net/movit",
+          "commit": "f0c77209245aa206996c7ef5395888e2859ff4bf"
+        }
+      ]
+    },
+    {
+      "name": "mlt",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DMOD_OPENCV=ON",
+        "-DMOD_MOVIT=ON",
+        "-DCMAKE_BUILD_TYPE=RelWithDebInfo"
+      ],
+      "sources": [
+        {
+          "type": "git",
+          "url": "https://github.com/mltframework/mlt.git",
+          "branch": "master"
+        }
+      ]
+    },
+    {
+      "name": "kdenlive",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=RelWithDebInfo"
+      ],
+      "post-install": [
+        "install -d /app/extensions/Plugins"
+      ],
+      "sources": [
+        {
+          "type": "git",
+          "url": "https://invent.kde.org/multimedia/kdenlive.git",
+          "branch": "master"
+        }
+      ]
+    }
+  ]
+}

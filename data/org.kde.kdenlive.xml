@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="application/x-kdenlive">
+    <comment>AmogEdit video project document</comment>
+    <comment xml:lang="az">AmogEdit video layihəsi sənədi</comment>
+    <comment xml:lang="ca">Document de projecte de vídeo del AmogEdit</comment>
+    <comment xml:lang="ca@valencia">Document de projecte de vídeo del AmogEdit</comment>
+    <comment xml:lang="cs">Dokument video projektu AmogEdit</comment>
+    <comment xml:lang="de">AmogEdit-Videoprojektdokument</comment>
+    <comment xml:lang="en_GB">AmogEdit video project document</comment>
+    <comment xml:lang="es">Proyecto de video de AmogEdit</comment>
+    <comment xml:lang="eu">AmogEdit-ko bideo-proiektuaren dokumentua</comment>
+    <comment xml:lang="fr">Document de projet vidéo pour AmogEdit</comment>
+    <comment xml:lang="it">Progetto video di AmogEdit</comment>
+    <comment xml:lang="ko">AmogEdit 동영상 프로젝트 문서</comment>
+    <comment xml:lang="lt">AmogEdit video projekto dokumentas</comment>
+    <comment xml:lang="nl">Video projectdocument van AmogEdit</comment>
+    <comment xml:lang="nn">AmogEdit-videoprosjektdokument</comment>
+    <comment xml:lang="pl">Dokument projektowy filmu AmogEdit</comment>
+    <comment xml:lang="pt">Documento de projecto de vídeo do AmogEdit</comment>
+    <comment xml:lang="pt_BR">Documento de projeto de vídeo do AmogEdit</comment>
+    <comment xml:lang="ru">Видеопроект AmogEdit</comment>
+    <comment xml:lang="sl">Dokument video projekta AmogEdit</comment>
+    <comment xml:lang="sv">AmogEdit-videoprojektdokument</comment>
+    <comment xml:lang="uk">документ відеопроєкту AmogEdit</comment>
+    <comment xml:lang="zh_CN">AmogEdit 视频工程文件</comment>
+    <sub-class-of type="video/mlt-playlist"/>
+    <glob pattern="*.kdenlive"/>
+  </mime-type>
+  <mime-type type="application/x-kdenlivetitle">
+    <comment>AmogEdit video title</comment>
+    <comment xml:lang="az">AmogEdit video başlığı</comment>
+    <comment xml:lang="ca">Títol de vídeo del AmogEdit</comment>
+    <comment xml:lang="ca@valencia">Títol de vídeo del AmogEdit</comment>
+    <comment xml:lang="cs">Název videa AmogEdit</comment>
+    <comment xml:lang="de">AmogEdit-Videotitel</comment>
+    <comment xml:lang="en_GB">AmogEdit video title</comment>
+    <comment xml:lang="es">Título de video de AmogEdit</comment>
+    <comment xml:lang="eu">AmogEdit-ko bideo-izenburua</comment>
+    <comment xml:lang="fr">Titre de vidéo pour AmogEdit</comment>
+    <comment xml:lang="it">Titolo video di AmogEdit</comment>
+    <comment xml:lang="ko">AmogEdit 동영상 타이틀</comment>
+    <comment xml:lang="nl">Titel van AmogEdit-video</comment>
+    <comment xml:lang="nn">AmogEdit-videotittel</comment>
+    <comment xml:lang="pl">Tytuł filmu AmogEdit</comment>
+    <comment xml:lang="pt">Título de vídeo do AmogEdit</comment>
+    <comment xml:lang="pt_BR">Título de vídeo do AmogEdit</comment>
+    <comment xml:lang="ru">Видеотитры AmogEdit</comment>
+    <comment xml:lang="sl">Naslov videa AmogEdit</comment>
+    <comment xml:lang="sv">AmogEdit-video</comment>
+    <comment xml:lang="uk">заголовок відео AmogEdit</comment>
+    <comment xml:lang="zh_CN">AmogEdit 视频标题</comment>
+    <sub-class-of type="application/xml"/>
+    <glob pattern="*.kdenlivetitle"/>
+  </mime-type>
+  <mime-type type="application/AmogEditlayout">
+    <comment>AmogEdit application layout</comment>
+    <comment xml:lang="az">AmogEdit tətbiq qatı</comment>
+    <comment xml:lang="ca">Disposició de l'aplicació AmogEdit</comment>
+    <comment xml:lang="ca@valencia">Disposició de l'aplicació AmogEdit</comment>
+    <comment xml:lang="cs">Rozvržení aplikace AmogEdit</comment>
+    <comment xml:lang="de">AmogEdit-Anwendungslayout</comment>
+    <comment xml:lang="en_GB">AmogEdit application layout</comment>
+    <comment xml:lang="es">Organización de paneles de AmogEdit</comment>
+    <comment xml:lang="eu">AmogEdit aplikazioaren antolaera</comment>
+    <comment xml:lang="fr">Mise en page de l'application AmogEdit</comment>
+    <comment xml:lang="it">Disposizione dell'applicazione AmogEdit</comment>
+    <comment xml:lang="ko">AmogEdit 프로그램 레이아웃</comment>
+    <comment xml:lang="nl">Toepassingsindeling van AmogEdit</comment>
+    <comment xml:lang="pl">Układ programu AmogEdit</comment>
+    <comment xml:lang="pt">Disposição da aplicação AmogEdit</comment>
+    <comment xml:lang="pt_BR">Layout de aplicativo do AmogEdit</comment>
+    <comment xml:lang="ru">Макет приложения AmogEdit</comment>
+    <comment xml:lang="sl">AmogEdit postavitev aplikacije</comment>
+    <comment xml:lang="sv">AmogEdit programlayout</comment>
+    <comment xml:lang="uk">Компонування вікон програми AmogEdit</comment>
+    <comment xml:lang="zh_CN">AmogEdit 应用程序布局</comment>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.kdenlivelayout"/>
+  </mime-type>
+</mime-info>

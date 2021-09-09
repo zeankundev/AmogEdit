@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="pics">
+        <file alias="kdenlive.png">../data/icons/48-apps-kdenlive.png</file>
+        <file alias="kdenlive-logo.png">../data/pics/kdenlive-logo.png</file>
+        <file alias="splash-background.png">../data/pics/splash-background.png</file>
+    </qresource>
+</RCC>
